@@ -107,6 +107,7 @@ y|yes )
 			echo "auto eth0" >> /etc/network/interfaces
 			echo -e "iface eth0 inet dhcp\n" >> /etc/network/interfaces
 			echo -e "allow -hotplug wlan0\n" >> /etc/network/interfaces
+			echo -e "auto wlan0"
 			echo "iface wlan0 inet static" >> /etc/network/interfaces
 			echo "address 192.168.42.1" >> /etc/network/interfaces
 			echo "netmask 255.255.255.0" >> /etc/network/interfaces
