@@ -86,7 +86,7 @@ y|yes )
 			mv /etc/udhcpd.conf /etc/udhcpd.conf.old
 			echo "start 192.168.42.2 #range of ips to give to clients" > /etc/udhcpd.conf
 			echo "end 192.168.42.20" >> /etc/udhcpd.conf
-			echo "interface wlan0 #defice to listen on" >> /etc/udhcpd.conf
+			echo "interface wlan0 #device to listen on" >> /etc/udhcpd.conf
 			echo "remaining yes" >> /etc/udhcpd.conf
 			echo "opt dns 8.8.8.8 8.8.4.4 #googles free dns servers" >> /etc/udhcpd.conf
 			echo "opt subnet 255.255.255.0" >> /etc/udhcpd.conf
@@ -102,12 +102,11 @@ y|yes )
 
 			ifdown wlan0
 			mv /etc/network/interfaces /etc/network/interfaces.old
-			echo -e "auto lo\n" > /etc/network/interfaces
+			echo "auto lo" > /etc/network/interfaces
 			echo -e "iface lo inet loopback\n" >> /etc/network/interfaces
 			echo "auto eth0" >> /etc/network/interfaces
 			echo -e "iface eth0 inet dhcp\n" >> /etc/network/interfaces
-			echo -e "allow -hotplug wlan0\n" >> /etc/network/interfaces
-			echo -e "auto wlan0"
+			echo -e "allow -hotplug wlan0" >> /etc/network/interfaces
 			echo "iface wlan0 inet static" >> /etc/network/interfaces
 			echo "address 192.168.42.1" >> /etc/network/interfaces
 			echo "netmask 255.255.255.0" >> /etc/network/interfaces
@@ -124,9 +123,12 @@ y|yes )
 			echo "wpa=2" >> /etc/hostapd/hostapd.conf
 			echo "wpa_passphrase=$wpa_pass" >> /etc/hostapd/hostapd.conf
 			echo "wpa_key_mgmt=WPA-PSK" >> /etc/hostapd/hostapd.conf
-			echo "wpa_pairwise=TKIP" >> /etc/hostapd/hostapd.conf
+			echo "wpa_pairwise=CCMP #TKIP max 54mbps CCMP max 105mbps" >> /etc/hostapd/hostapd.conf
 			echo "rsn_pairwise=CCMP" >> /etc/hostapd/hostapd.conf
 			echo "ctrl_interface=/var/run/hostapd" >> /etc/hostapd/hostapd.conf
+			echo "wme_enabled=1	#to enable n" >> /etc/hostapd/hostapd.conf
+			echo "ieee80211n=1	#to enable n" >> /etc/hostapd/hostapd.conf
+			echo "ht_caab=[HT40+][SHORT-GL-40][DSSS_CCK-40] #to enable n" >> /etc/hostapd/hostapd.conf
 
 			mv /etc/default/hostapd /etc/default/hostapd.old
 			awk '{
@@ -151,6 +153,8 @@ y|yes )
 				service udhcpd start
 				;;
 			* )
+				service hostapd stop
+				service udhcpd stop
 				;;
 			esac
 			case "$autostart" in
