@@ -103,7 +103,8 @@ y|yes )
 			ifdown wlan0
 			mv /etc/network/interfaces /etc/network/interfaces.old
 			echo -e "auto lo\n" > /etc/network/interfaces
-			echo "iface lo inet loopback" >> /etc/network/interfaces
+			echo -e "iface lo inet loopback\n" >> /etc/network/interfaces
+			echo "auto eth0" >> /etc/network/interfaces
 			echo -e "iface eth0 inet dhcp\n" >> /etc/network/interfaces
 			echo -e "allow -hotplug wlan0\n" >> /etc/network/interfaces
 			echo "iface wlan0 inet static" >> /etc/network/interfaces
@@ -167,7 +168,7 @@ y|yes )
 			y|yes )
 				echo -e "\n#Access point aliases" >> /etc/profile
 				echo "alias APup='service hostapd start; service udhcpd start'" >> /etc/profile
-				echo "alias APdown='service hostapd stop service udhcpd stop'" >> /etc/profile
+				echo "alias APdown='service hostapd stop; service udhcpd stop'" >> /etc/profile
 				;;
 			* )
 				;;
