@@ -124,6 +124,7 @@ y|yes )
 			echo "wpa_key_mgmt=WPA-PSK" >> /etc/hostapd/hostapd.conf
 			echo "wpa_pairwise=TKIP" >> /etc/hostapd/hostapd.conf
 			echo "rsn_pairwise=CCMP" >> /etc/hostapd/hostapd.conf
+			echo "ctrl_interface=/var/run/hostapd" >> /etc/hostapd/hostapd.conf
 
 			mv /etc/default/hostapd /etc/default/hostapd.old
 			awk '{
