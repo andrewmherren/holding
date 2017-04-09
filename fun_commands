@@ -1,0 +1,18 @@
+
+cowsay - cow speach bubble
+figlet - text ascii art
+pv -qL 10 - print a line of text char by char like in the movies
+fortune - random fortunes
+sl - steam locomotive
+cmatrix - see the matrix
+espeak - text to voice
+festival - text to voice echo something | festival --tts
+aafire - sudo apt-get install libaa-bin
+ispell - command line spellcheck
+asciiview tux.png -driver curses - create ascii art from images apt-get install aview
+lynx - web browser but use for scren scrape. lynx http://www.google.com > file awk file
+
+hide a file or dir in an image - 
+zip -r <new name.zip> <what to hide>
+cat image.jpg file.zip > new_image.jpg (order is important)
+unzip new_image.jpg
